@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <button>dfgh</button>
+    <script>
+      let btn = document.querySelector('button')
+      let then = throu(function(){
+        console.log(this+new Date())
+      },3000)
+      btn.onclick = then
+      function throu(fun,time){
+        let timeOut
+        let startTime = new Date()
+        return function () {
+          let nowTime = new Date()
+          clearTimeout(timeOut)
+          if(nowTime - startTime >= time){
+            fun.call(this)
+            startTime = new Date()
+          } else {
+            timeOut = setTimeout(()=>{
+              fun.call(this)
+              startTime = new Date()
+            },nowTime - startTime)
+          }
+        }
+      }
+      </script>
+</body>
+</html>
